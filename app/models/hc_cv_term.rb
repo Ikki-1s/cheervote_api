@@ -1,0 +1,2 @@
+class HcCvTerm < ApplicationRecord
+end

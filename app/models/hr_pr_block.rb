@@ -1,0 +1,2 @@
+class HrPrBlock < ApplicationRecord
+end

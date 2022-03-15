@@ -1,0 +1,2 @@
+class CvEvaluationValue < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class HrConstituency < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class HcConstituencyCv < ApplicationRecord
+end

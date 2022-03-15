@@ -1,0 +1,2 @@
+class PoliticalPartyMember < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class HrConstituencyCv < ApplicationRecord
+end
