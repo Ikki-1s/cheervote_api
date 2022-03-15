@@ -1,0 +1,2 @@
+class HrMember < ApplicationRecord
+end

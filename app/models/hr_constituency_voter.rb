@@ -1,0 +1,2 @@
+class HrConstituencyVoter < ApplicationRecord
+end

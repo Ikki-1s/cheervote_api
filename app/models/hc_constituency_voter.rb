@@ -1,0 +1,2 @@
+class HcConstituencyVoter < ApplicationRecord
+end

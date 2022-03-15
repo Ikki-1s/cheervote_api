@@ -1,0 +1,2 @@
+class HcConstituencyPref < ApplicationRecord
+end

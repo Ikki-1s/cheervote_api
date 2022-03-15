@@ -1,0 +1,2 @@
+class HcMember < ApplicationRecord
+end

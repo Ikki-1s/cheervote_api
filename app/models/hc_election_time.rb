@@ -1,0 +1,2 @@
+class HcElectionTime < ApplicationRecord
+end
