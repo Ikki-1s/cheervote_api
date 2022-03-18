@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_14_152305) do
+ActiveRecord::Schema.define(version: 2022_03_18_040153) do
 
   create_table "cv_evaluation_values", charset: "utf8mb4", force: :cascade do |t|
     t.integer "value", null: false
+    t.string "value_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -21,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
   create_table "hc_constituencies", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.integer "quota", null: false
+    t.integer "reelection_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -64,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
   end
 
   create_table "hc_election_times", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "election_times", null: false
+    t.integer "election_time", null: false
     t.date "announcement_date"
     t.date "election_date"
     t.date "expiration_date"
@@ -74,7 +76,6 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
 
   create_table "hc_members", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "politician_id", null: false
-    t.bigint "political_party_id"
     t.bigint "hc_election_time_id", null: false
     t.integer "elected_system", null: false
     t.bigint "hc_constituency_id"
@@ -82,7 +83,6 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["hc_constituency_id"], name: "index_hc_members_on_hc_constituency_id"
     t.index ["hc_election_time_id"], name: "index_hc_members_on_hc_election_time_id"
-    t.index ["political_party_id"], name: "index_hc_members_on_political_party_id"
     t.index ["politician_id"], name: "index_hc_members_on_politician_id"
   end
 
@@ -125,17 +125,17 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
   end
 
   create_table "hr_election_times", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "election_times", null: false
+    t.integer "election_time", null: false
     t.date "announcement_date"
     t.date "election_date"
     t.date "expiration_date"
+    t.date "dissolution_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "hr_members", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "politician_id", null: false
-    t.bigint "political_party_id"
     t.bigint "hr_election_time_id", null: false
     t.integer "elected_system", null: false
     t.bigint "hr_constituency_id"
@@ -145,7 +145,6 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
     t.index ["hr_constituency_id"], name: "index_hr_members_on_hr_constituency_id"
     t.index ["hr_election_time_id"], name: "index_hr_members_on_hr_election_time_id"
     t.index ["hr_pr_block_id"], name: "index_hr_members_on_hr_pr_block_id"
-    t.index ["political_party_id"], name: "index_hr_members_on_political_party_id"
     t.index ["politician_id"], name: "index_hr_members_on_politician_id"
   end
 
@@ -178,9 +177,9 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
 
   create_table "politicians", charset: "utf8mb4", force: :cascade do |t|
     t.string "last_name_kanji", limit: 5, null: false
-    t.string "first_name_kanji", limit: 10, null: false
+    t.string "first_name_kanji", limit: 10
     t.string "last_name_kana", limit: 8, null: false
-    t.string "first_name_kana", limit: 20, null: false
+    t.string "first_name_kana", limit: 20
     t.text "career"
     t.string "website"
     t.string "twitter"
@@ -237,7 +236,6 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
   add_foreign_key "hc_constituency_voters", "hc_constituencies"
   add_foreign_key "hc_members", "hc_constituencies"
   add_foreign_key "hc_members", "hc_election_times"
-  add_foreign_key "hc_members", "political_parties"
   add_foreign_key "hc_members", "politicians"
   add_foreign_key "hr_constituencies", "prefectures"
   add_foreign_key "hr_constituency_cvs", "cv_evaluation_values"
@@ -248,7 +246,6 @@ ActiveRecord::Schema.define(version: 2022_03_14_152305) do
   add_foreign_key "hr_members", "hr_constituencies"
   add_foreign_key "hr_members", "hr_election_times"
   add_foreign_key "hr_members", "hr_pr_blocks"
-  add_foreign_key "hr_members", "political_parties"
   add_foreign_key "hr_members", "politicians"
   add_foreign_key "political_party_members", "political_parties"
   add_foreign_key "political_party_members", "politicians"
