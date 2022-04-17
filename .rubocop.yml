@@ -1,0 +1,64 @@
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "bin/**"
+    - "config/**/*"
+    - "db/**/*"
+    - "lib/**"
+    - "Gemfile"
+
+# 20 行超えるのは migration ファイル以外滅多に無い
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - "db/migrate/*.rb"
+    - "app/models/hr_member.rb"
+
+# scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
+# namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# ドキュメントの無い public class を許可する
+Style/Documentation:
+  Enabled: false
+
+# 空メソッドの場合だけ1行で書かなければいけない理由が無い
+# 「セミコロンは使わない」に寄せた方がルールがシンプル
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+# 文字リテラルのイミュータブル宣言を無視（freezeになるのはRuby3以降）
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: always, always_true, never
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# rake タスクの順序の hash は rocket を許可する
+Style/HashSyntax:
+  Exclude:
+    - "**/*.rake"
+    - "Rakefile"
+
+# * 式展開したい場合に書き換えるのが面倒
+# * 文章ではダブルクォートよりもシングルクォートの方が頻出する
+# ことから EnforcedStyle: double_quotes 推奨
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# %w() と %i() が見分けづらいので Style/WordArray と合わせて無効に。
+# 書き手に委ねるという意味で、Enabled: false にしています。使っても良い。
+Style/SymbolArray:
+  Enabled: false
+Style/WordArray:
+  Enabled: false
+
+# private/protected は一段深くインデントする
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
