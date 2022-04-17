@@ -1,0 +1,12 @@
+# has_manyにdependentをつけなければならないかはいずれ検討する。
+# 作り的には不要そうだからdependent: :nilで良さそう。
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+# 「rails g devise_token_auth:install User auth」で自動生成した際に
+# ApplicationRecordではなく、ActiveRecord::Baseから継承していた。
+# ApplicationRecordを継承するようにしても多分問題ないが、
+# ログイン機能を実装する際に改めて見直す。
+Rails/ApplicationRecord:
+  Exclude:
+    - "app/models/user.rb"

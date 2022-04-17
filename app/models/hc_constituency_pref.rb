@@ -1,4 +1,4 @@
 class HcConstituencyPref < ApplicationRecord
-  belongs_to :prefecture
+  has_many :prefectures
   belongs_to :hc_constituency
 end

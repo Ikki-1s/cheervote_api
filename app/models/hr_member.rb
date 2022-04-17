@@ -19,15 +19,15 @@ class HrMember < ApplicationRecord
     #   }
     # )
     eager_load(
-      :hr_constituency, {politician: {political_party_members: :political_party}}
+      :hr_constituency, { politician: { political_party_members: :political_party } }
     ).where(
-      hr_election_time_id: hr_election_time_id, elected_system: 1, hr_constituencies:{prefecture_id: prefecture_id}
+      hr_election_time_id: hr_election_time_id, elected_system: 1, hr_constituencies: { prefecture_id: prefecture_id }
     ).order(
       "hr_constituencies.id ASC"
     ).to_json(
       only: [:id],
       include: {
-        hr_constituency: {only: [:id, :name]},
+        hr_constituency: { only: [:id, :name] },
         politician: {
           only: [:id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana],
           include: {
