@@ -19,6 +19,7 @@ Metrics/MethodLength:
   Exclude:
     - "db/migrate/*.rb"
     - "app/models/hr_member.rb"
+    - "app/models/hc_member.rb"
 
 # scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
 # namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。

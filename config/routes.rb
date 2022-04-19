@@ -5,10 +5,20 @@ Rails.application.routes.draw do
         registrations: "api/v1/auth/registrations"
       }
 
+      controller :hc_constituencies do
+        resources :hc_constituencies, only: [:index, :show]
+      end
+
+      controller :hc_members do
+        get "/hc_members/hc_constituencies/:id", to: "hc_members#index_of_hc_constituency"
+        get "/hc_members/hc_pr", to: "hc_members#index_of_hc_pr"
+        resources :hc_members
+      end
+
       controller :hr_members do
-        resources :hr_members
         get "/hr_members/prefectures/:id", to: "hr_members#index_of_prefecture"
         get "/hr_members/hr_pr_blocks/:id", to: "hr_members#index_of_hr_pr_block"
+        resources :hr_members
       end
 
       controller :hr_pr_blocks do
