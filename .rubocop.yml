@@ -20,6 +20,12 @@ Metrics/MethodLength:
     - "db/migrate/*.rb"
     - "app/models/hr_member.rb"
     - "app/models/hc_member.rb"
+    - "app/models/political_party.rb"
+    - "app/models/political_party_member.rb"
+
+# https://qiita.com/mtsuge/items/e56015c93ce1ae8afd63
+Metrics/AbcSize:
+  Max: 20
 
 # scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
 # namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。

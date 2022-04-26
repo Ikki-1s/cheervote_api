@@ -18,11 +18,20 @@ Rails.application.routes.draw do
       controller :hr_members do
         get "/hr_members/prefectures/:id", to: "hr_members#index_of_prefecture"
         get "/hr_members/hr_pr_blocks/:id", to: "hr_members#index_of_hr_pr_block"
-        resources :hr_members
       end
 
       controller :hr_pr_blocks do
         resources :hr_pr_blocks, only: [:index, :show]
+      end
+
+      controller :political_parties do
+        get "/political_parties/active", to: "political_parties#index_having_active_members"
+        resources :political_parties, only: [:show]
+      end
+
+      controller :political_party_members do
+        get "/political_party_members/hr_members/:id", to: "political_party_members#index_of_hr_members"
+        get "/political_party_members/hc_members/:id", to: "political_party_members#index_of_hc_members"
       end
 
       controller :prefectures do
