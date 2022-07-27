@@ -1,4 +1,4 @@
-class Api::V1::HcMembersController < Api::V1::ApplicationController
+class Api::V1::HcMembersController < ApplicationController
   # 選挙区ごとの参議院議員
   def index_of_hc_constituency
     active_hc_election_time_ids = HcElectionTime.pluck(:id).last(2)

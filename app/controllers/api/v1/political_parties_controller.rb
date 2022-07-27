@@ -1,4 +1,4 @@
-class Api::V1::PoliticalPartiesController < Api::V1::ApplicationController
+class Api::V1::PoliticalPartiesController < ApplicationController
   def show
     political_party = PoliticalParty.select(:id, :name_kanji, :name_kana, :abbreviation_kanji,
                                             :abbreviation_kana).where(id: params[:id])

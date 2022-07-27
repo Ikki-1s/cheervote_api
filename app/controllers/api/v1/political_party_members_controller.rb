@@ -1,4 +1,4 @@
-class Api::V1::PoliticalPartyMembersController < Api::V1::ApplicationController
+class Api::V1::PoliticalPartyMembersController < ApplicationController
   def index_of_hr_members
     latest_hr_election_time_id = HrElectionTime.last.id
     hr_members = PoliticalPartyMember.political_party_hr_members(political_party_id: params[:id],

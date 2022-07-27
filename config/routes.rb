@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api do
     namespace :v1 do
       mount_devise_token_auth_for "User", at: "auth", controllers: {
@@ -36,6 +37,18 @@ Rails.application.routes.draw do
 
       controller :prefectures do
         resources :prefectures, only: [:index, :show]
+      end
+
+      # controller :users do
+      #   resources :users, only: [:index]
+      # end
+
+      controller :tests do
+        resources :tests, only: [:index]
+      end
+
+      namespace :auth do
+        resources :sessions, only: [:index]
       end
 
     end

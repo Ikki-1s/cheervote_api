@@ -1,4 +1,4 @@
-class Api::V1::PrefecturesController < Api::V1::ApplicationController
+class Api::V1::PrefecturesController < ApplicationController
   def index
     prefectures = Prefecture.select(:id, :prefecture)
     render json: prefectures
