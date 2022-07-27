@@ -1,4 +1,4 @@
-class Api::V1::HcConstituenciesController < Api::V1::ApplicationController
+class Api::V1::HcConstituenciesController < ApplicationController
   def index
     hc_constituencies = HcConstituency.select(:id, :name, :quota)
     render json: hc_constituencies

@@ -1,4 +1,4 @@
-class Api::V1::HrPrBlocksController < Api::V1::ApplicationController
+class Api::V1::HrPrBlocksController < ApplicationController
   def index
     hr_pr_blocks = HrPrBlock.select(:id, :block_name, :quota)
     render json: hr_pr_blocks
