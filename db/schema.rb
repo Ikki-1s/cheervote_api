@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_040153) do
+ActiveRecord::Schema.define(version: 2022_08_02_063919) do
 
   create_table "cv_evaluation_values", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "value", null: false
@@ -25,19 +25,6 @@ ActiveRecord::Schema.define(version: 2022_03_18_040153) do
     t.integer "reelection_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "hc_constituency_cvs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "hc_member_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "hc_cv_term_id", null: false
-    t.bigint "cv_evaluation_value_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["cv_evaluation_value_id"], name: "index_hc_constituency_cvs_on_cv_evaluation_value_id"
-    t.index ["hc_cv_term_id"], name: "index_hc_constituency_cvs_on_hc_cv_term_id"
-    t.index ["hc_member_id"], name: "index_hc_constituency_cvs_on_hc_member_id"
-    t.index ["user_id"], name: "index_hc_constituency_cvs_on_user_id"
   end
 
   create_table "hc_constituency_prefs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -63,6 +50,20 @@ ActiveRecord::Schema.define(version: 2022_03_18_040153) do
     t.datetime "end_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "hc_cvs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "hc_member_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "hc_cv_term_id", null: false
+    t.bigint "cv_evaluation_value_id", null: false
+    t.integer "my_constituency_flg"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cv_evaluation_value_id"], name: "index_hc_cvs_on_cv_evaluation_value_id"
+    t.index ["hc_cv_term_id"], name: "index_hc_cvs_on_hc_cv_term_id"
+    t.index ["hc_member_id"], name: "index_hc_cvs_on_hc_member_id"
+    t.index ["user_id"], name: "index_hc_cvs_on_user_id"
   end
 
   create_table "hc_election_times", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -95,19 +96,6 @@ ActiveRecord::Schema.define(version: 2022_03_18_040153) do
     t.index ["prefecture_id"], name: "index_hr_constituencies_on_prefecture_id"
   end
 
-  create_table "hr_constituency_cvs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "hr_member_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "hr_cv_term_id", null: false
-    t.bigint "cv_evaluation_value_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["cv_evaluation_value_id"], name: "index_hr_constituency_cvs_on_cv_evaluation_value_id"
-    t.index ["hr_cv_term_id"], name: "index_hr_constituency_cvs_on_hr_cv_term_id"
-    t.index ["hr_member_id"], name: "index_hr_constituency_cvs_on_hr_member_id"
-    t.index ["user_id"], name: "index_hr_constituency_cvs_on_user_id"
-  end
-
   create_table "hr_constituency_voters", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "hr_constituency_id", null: false
     t.integer "number_of_voter", null: false
@@ -122,6 +110,20 @@ ActiveRecord::Schema.define(version: 2022_03_18_040153) do
     t.datetime "end_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "hr_cvs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "hr_member_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "hr_cv_term_id", null: false
+    t.bigint "cv_evaluation_value_id", null: false
+    t.integer "my_constituency_flg"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cv_evaluation_value_id"], name: "index_hr_cvs_on_cv_evaluation_value_id"
+    t.index ["hr_cv_term_id"], name: "index_hr_cvs_on_hr_cv_term_id"
+    t.index ["hr_member_id"], name: "index_hr_cvs_on_hr_member_id"
+    t.index ["user_id"], name: "index_hr_cvs_on_user_id"
   end
 
   create_table "hr_election_times", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -227,22 +229,22 @@ ActiveRecord::Schema.define(version: 2022_03_18_040153) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "hc_constituency_cvs", "cv_evaluation_values"
-  add_foreign_key "hc_constituency_cvs", "hc_cv_terms"
-  add_foreign_key "hc_constituency_cvs", "hc_members"
-  add_foreign_key "hc_constituency_cvs", "users"
   add_foreign_key "hc_constituency_prefs", "hc_constituencies"
   add_foreign_key "hc_constituency_prefs", "prefectures"
   add_foreign_key "hc_constituency_voters", "hc_constituencies"
+  add_foreign_key "hc_cvs", "cv_evaluation_values"
+  add_foreign_key "hc_cvs", "hc_cv_terms"
+  add_foreign_key "hc_cvs", "hc_members"
+  add_foreign_key "hc_cvs", "users"
   add_foreign_key "hc_members", "hc_constituencies"
   add_foreign_key "hc_members", "hc_election_times"
   add_foreign_key "hc_members", "politicians"
   add_foreign_key "hr_constituencies", "prefectures"
-  add_foreign_key "hr_constituency_cvs", "cv_evaluation_values"
-  add_foreign_key "hr_constituency_cvs", "hr_cv_terms"
-  add_foreign_key "hr_constituency_cvs", "hr_members"
-  add_foreign_key "hr_constituency_cvs", "users"
   add_foreign_key "hr_constituency_voters", "hr_constituencies"
+  add_foreign_key "hr_cvs", "cv_evaluation_values"
+  add_foreign_key "hr_cvs", "hr_cv_terms"
+  add_foreign_key "hr_cvs", "hr_members"
+  add_foreign_key "hr_cvs", "users"
   add_foreign_key "hr_members", "hr_constituencies"
   add_foreign_key "hr_members", "hr_election_times"
   add_foreign_key "hr_members", "hr_pr_blocks"

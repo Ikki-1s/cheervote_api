@@ -1,4 +1,4 @@
-class HcConstituencyCv < ApplicationRecord
+class HcCv < ApplicationRecord
   belongs_to :hc_member
   belongs_to :user
   belongs_to :hc_cv_term

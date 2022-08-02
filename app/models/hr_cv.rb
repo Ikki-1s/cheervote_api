@@ -1,4 +1,4 @@
-class HrConstituencyCv < ApplicationRecord
+class HrCv < ApplicationRecord
   belongs_to :hr_member
   belongs_to :user
   belongs_to :hr_cv_term

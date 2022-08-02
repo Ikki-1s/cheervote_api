@@ -2,7 +2,7 @@ class HcMember < ApplicationRecord
   belongs_to :politician
   belongs_to :hc_election_time
   belongs_to :hc_constituency
-  has_many :hc_constituency_cvs
+  has_many :hc_cvs
 
   # 選挙区ごとの参議院議員
   def self.latest_of_hc_constituency(hc_constituency_id:, hc_election_time_ids:)

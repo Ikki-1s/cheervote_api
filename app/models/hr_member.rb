@@ -3,7 +3,7 @@ class HrMember < ApplicationRecord
   belongs_to :hr_election_time
   belongs_to :hr_constituency
   belongs_to :hr_pr_block
-  has_many :hr_constituency_cvs
+  has_many :hr_cvs
 
   # 都道府県ごとの小選挙区選出衆議院議員
   def self.latest_of_prefecture(prefecture_id:, hr_election_time_id:)

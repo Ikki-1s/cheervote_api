@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   belongs_to :hr_constituency
   belongs_to :hc_constituency
   belongs_to :prefecture
-  has_many :hr_constituency_cvs
-  has_many :hc_constituency_cvs
+  has_many :hr_cvs
+  has_many :hc_cvs
 end
