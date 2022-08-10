@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       controller :hc_members do
         get "/hc_members/hc_constituencies/:id", to: "hc_members#index_of_hc_constituency"
         get "/hc_members/hc_pr", to: "hc_members#index_of_hc_pr"
-        resources :hc_members
       end
 
       controller :hr_members do
@@ -33,6 +32,10 @@ Rails.application.routes.draw do
       controller :political_party_members do
         get "/political_party_members/hr_members/:id", to: "political_party_members#index_of_hr_members"
         get "/political_party_members/hc_members/:id", to: "political_party_members#index_of_hc_members"
+      end
+
+      controller :politicians do
+        resources :politicians, only: [:index, :show]
       end
 
       controller :prefectures do

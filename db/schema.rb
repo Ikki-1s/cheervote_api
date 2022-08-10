@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_02_063919) do
+ActiveRecord::Schema.define(version: 2022_08_08_053710) do
 
   create_table "cv_evaluation_values", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "value", null: false
@@ -80,6 +80,10 @@ ActiveRecord::Schema.define(version: 2022_08_02_063919) do
     t.bigint "hc_election_time_id", null: false
     t.integer "elected_system", null: false
     t.bigint "hc_constituency_id"
+    t.date "mid_term_start_date"
+    t.text "mid_term_start_reason"
+    t.date "mid_term_end_date"
+    t.text "mid_term_end_reason"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["hc_constituency_id"], name: "index_hc_members_on_hc_constituency_id"
@@ -142,6 +146,10 @@ ActiveRecord::Schema.define(version: 2022_08_02_063919) do
     t.integer "elected_system", null: false
     t.bigint "hr_constituency_id"
     t.bigint "hr_pr_block_id"
+    t.date "mid_term_start_date"
+    t.text "mid_term_start_reason"
+    t.date "mid_term_end_date"
+    t.text "mid_term_end_reason"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["hr_constituency_id"], name: "index_hr_members_on_hr_constituency_id"
