@@ -24,4 +24,5 @@ HcElectionTime.seed(:id, :election_time,
   { id: 23, election_time: 23, announcement_date: '2013-7-4', election_date: '2013-7-21', expiration_date: '2019-7-28', },
   { id: 24, election_time: 24, announcement_date: '2016-6-22', election_date: '2016-7-10', expiration_date: '2022-7-25', },
   { id: 25, election_time: 25, announcement_date: '2019-7-4', election_date: '2019-7-21', expiration_date: '2025-7-28', },
+  { id: 26, election_time: 26, announcement_date: '2022-6-22', election_date: '2022-7-10', expiration_date: '2028-7-25', },
 )
