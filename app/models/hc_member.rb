@@ -68,4 +68,46 @@ class HcMember < ApplicationRecord
       }
     )
   end
+
+  # 政治家.id（、参議院選挙回.id、途中任期開始日）を指定して参議院議員を取得
+    # 政治家.idのみの指定の場合、現役の参議院議員を取得する
+    # 値は配列内にハッシュを含む形で取得（取得できない場合は空の配列が返る）
+    #
+    # mid_term_end_dateでnil以外を指定したい場合は、
+    # 指定する参議院選挙回の「election_date以上」のように指定する
+    # （例.「"2022-7-1"..」、「HcElectionTime.last.election_date..」）
+  def self.of_politician_on_hc_election_time(politician_id:, hc_election_time_ids: HcElectionTime.pluck(:id).last(2), mid_term_end_date: nil)
+    eager_load(
+      :hc_election_time,
+      :hc_constituency,
+      politician: { political_party_members: :political_party }
+    ).where(
+      politician_id: politician_id,
+      hc_election_time_id: hc_election_time_ids,
+      mid_term_end_date: mid_term_end_date
+    ).as_json(
+      except: [:created_at, :updated_at],
+      include: {
+        hc_election_time: {
+          except: [:created_at, :updated_at],
+        },
+        hc_constituency: {
+          only: [:id, :name]
+        },
+        politician: {
+          except: [:created_at, :updated_at],
+          include: {
+            political_party_members: {
+              except: [:created_at, :updated_at],
+              include: {
+                political_party: {
+                  except: [:created_at, :updated_at]
+                }
+              }
+            }
+          }
+        }
+      }
+    )
+  end
 end

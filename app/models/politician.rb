@@ -16,11 +16,17 @@ class Politician < ApplicationRecord
       political_party_members: :political_party
     ).where(
       id: politician_id
-    ).to_json(
-      only: [:id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana],
+    ).as_json(
+      only: [
+        :id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana,
+        :career, :website, :twitter, :youtube, :facebook, :other_sns
+      ],
       include: {
         hr_members: {
-          only: [:id, :hr_election_time_id, :elected_system, :hr_constituency_id, :hr_pr_block_id],
+          only: [
+            :id, :politician_id, :hr_election_time_id, :elected_system, :hr_constituency_id, :hr_pr_block_id,
+            :mid_term_start_date, :mid_term_start_reason, :mid_term_end_date, :mid_term_end_reason
+          ],
           include: {
             hr_election_time: {
               only: [:id, :election_time, :announcement_date, :election_date, :expiration_date, :dissolution_date]
@@ -39,7 +45,10 @@ class Politician < ApplicationRecord
           }
         },
         hc_members: {
-          only: [:id, :politician_id, :hc_election_time_id, :elected_system, :hc_constituency_id],
+          only: [
+            :id, :politician_id, :hc_election_time_id, :elected_system, :hc_constituency_id,
+            :mid_term_start_date, :mid_term_start_reason, :mid_term_end_date, :mid_term_end_reason
+          ],
           include: {
             hc_election_time: {
               only: [:id, :election_time, :announcement_date, :election_date, :expiration_date]

@@ -11,32 +11,45 @@ class PoliticalParty < ApplicationRecord
     relation = PoliticalPartyMember.eager_load(
       :political_party, { politician: :hr_members }, { politician: :hc_members }
     )
-    political_party_ids = relation.where(
+    political_party_ids_and_names = relation.where(
       hr_members: { hr_election_time_id: hr_election_time_id }
     ).or(
       relation.where(
         hc_members: { hc_election_time_id: hc_election_time_ids }
       )
+    ).where(
+      hr_members: { mid_term_end_date: nil},
+      hc_members: {mid_term_end_date: nil}
     ).group(
-      "political_parties.id"
-    ).order(
-      count_id: :desc
-    ).count.keys
-    political_party_names = relation.where(
-      hr_members: { hr_election_time_id: hr_election_time_id }
-    ).or(
-      relation.where(
-        hc_members: { hc_election_time_id: hc_election_time_ids }
-      )
-    ).group(
+      "political_parties.id",
       "political_parties.name_kanji"
     ).order(
-      count_id: :desc
+      "count_id desc",
+      "political_parties.name_kana asc"
     ).count.keys
+
+    # political_party_names = relation.where(
+    #   hr_members: { hr_election_time_id: hr_election_time_id }
+    # ).or(
+    #   relation.where(
+    #     hc_members: { hc_election_time_id: hc_election_time_ids }
+    #   )
+    # ).group(
+    #   "political_parties.name_kanji"
+    # ).order(
+    #   # count_id: :desc
+    #   # "count_id desc"
+    #   # "count_id desc, political_parties.name_kana asc"
+    # ).count.keys
+
     political_parties_order_by_number_of_members = []
-    political_party_ids.zip(political_party_names) do |id, name|
-      political_parties_order_by_number_of_members << { "id" => id, "name" => name }
-    end
+    # political_party_ids.zip(political_party_names) do |id, name|
+    #   political_parties_order_by_number_of_members << { "id" => id, "name" => name }
+    # end
+    political_party_ids_and_names.each{
+      |v| political_parties_order_by_number_of_members << { "id" => v[0], "name" => v[1] }
+    }
+
     political_parties_order_by_number_of_members
   end
 end
