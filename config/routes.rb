@@ -1,18 +1,34 @@
 Rails.application.routes.draw do
-
   namespace :api do
     namespace :v1 do
       mount_devise_token_auth_for "User", at: "auth", controllers: {
         registrations: "api/v1/auth/registrations"
       }
 
+      controller :cheervotes do
+        resources :cheervotes, only: [:show]
+        # get "/cheervotes" => "cheervotes#show"
+      end
+
+      controller :cv_questions do
+        resources :cv_questions, only: [:show]
+      end
+
       controller :hc_constituencies do
         resources :hc_constituencies, only: [:index, :show]
+      end
+
+      controller :hc_cvs do
+        resources :hc_cvs, only: [:create]
       end
 
       controller :hc_members do
         get "/hc_members/hc_constituencies/:id", to: "hc_members#index_of_hc_constituency"
         get "/hc_members/hc_pr", to: "hc_members#index_of_hc_pr"
+      end
+
+      controller :hr_cvs do
+        resources :hr_cvs, only: [:create]
       end
 
       controller :hr_members do
