@@ -6,8 +6,9 @@ Rails.application.routes.draw do
       }
 
       controller :cheervotes do
+        get "/cheervotes/results/pie", to: "cheervotes#result_for_pie_chart"
+        get "/cheervotes/terms/active/:politician", to: "cheervotes#active_cv_terms_of_politician"
         resources :cheervotes, only: [:show]
-        # get "/cheervotes" => "cheervotes#show"
       end
 
       controller :cv_questions do
