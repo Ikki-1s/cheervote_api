@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_26_133359) do
+ActiveRecord::Schema.define(version: 2023_02_04_023444) do
 
   create_table "cv_evaluation_values", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "cv_question_id", null: false
@@ -171,6 +171,15 @@ ActiveRecord::Schema.define(version: 2022_08_26_133359) do
     t.index ["politician_id"], name: "index_hr_members_on_politician_id"
   end
 
+  create_table "hr_pr_block_prefs", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "hr_pr_block_id", null: false
+    t.bigint "prefecture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hr_pr_block_id"], name: "index_hr_pr_block_prefs_on_hr_pr_block_id"
+    t.index ["prefecture_id"], name: "index_hr_pr_block_prefs_on_prefecture_id"
+  end
+
   create_table "hr_pr_blocks", charset: "utf8mb4", force: :cascade do |t|
     t.string "block_name", null: false
     t.integer "quota", null: false
@@ -203,11 +212,15 @@ ActiveRecord::Schema.define(version: 2022_08_26_133359) do
     t.string "first_name_kanji", limit: 10
     t.string "last_name_kana", limit: 8, null: false
     t.string "first_name_kana", limit: 20
+    t.string "image"
+    t.date "birthday"
     t.text "career"
     t.string "website"
     t.string "twitter"
     t.string "youtube"
     t.string "facebook"
+    t.string "instagram"
+    t.string "line"
     t.string "other_sns"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -273,6 +286,8 @@ ActiveRecord::Schema.define(version: 2022_08_26_133359) do
   add_foreign_key "hr_members", "hr_election_times"
   add_foreign_key "hr_members", "hr_pr_blocks"
   add_foreign_key "hr_members", "politicians"
+  add_foreign_key "hr_pr_block_prefs", "hr_pr_blocks"
+  add_foreign_key "hr_pr_block_prefs", "prefectures"
   add_foreign_key "political_party_members", "political_parties"
   add_foreign_key "political_party_members", "politicians"
   add_foreign_key "users", "hc_constituencies"

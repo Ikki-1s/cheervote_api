@@ -81,7 +81,7 @@ class Cheervote < ApplicationRecord
 
 
     ### データ集約して返却 ###
-    except_house_member_data = { "current_cv_term" => current_cv_term.as_json }.merge(
+    merged_house_member_data = { "current_cv_term" => current_cv_term.as_json }.merge(
       { "is_my_constituency_member" => is_my_constituency_member },
       { "is_login_user_possible_to_cv_on_term" => is_login_user_possible_to_cv_on_term }
     )
@@ -90,13 +90,13 @@ class Cheervote < ApplicationRecord
     if hr_member
       { "is_active_house_member" => true }.merge(
         { "hr_member" => hr_member },
-        except_house_member_data
+        merged_house_member_data
       )
     # 参議院議員
     elsif hc_member
       { "is_active_house_member" => true }.merge(
         { "hc_member" => hc_member },
-        except_house_member_data
+        merged_house_member_data
       )
     else
       { "is_active_house_member" => false }

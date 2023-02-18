@@ -19,7 +19,7 @@ class Politician < ApplicationRecord
     ).as_json(
       only: [
         :id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana,
-        :career, :website, :twitter, :youtube, :facebook, :other_sns
+        :image, :career, :website, :twitter, :youtube, :facebook, :other_sns
       ],
       include: {
         hr_members: {

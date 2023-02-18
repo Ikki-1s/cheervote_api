@@ -56,12 +56,17 @@ Rails.application.routes.draw do
       end
 
       controller :prefectures do
+        get "/prefectures/all_constituencies_and_blocks", to: "prefectures#index_with_all_constituencies_and_blocks"
         resources :prefectures, only: [:index, :show]
       end
 
-      # controller :users do
-      #   resources :users, only: [:index]
-      # end
+      controller :signed_in_homes do
+        resources :signed_in_homes, only: [:index]
+      end
+
+      controller :users do
+        # resources :users, only: [:index]
+      end
 
       controller :tests do
         resources :tests, only: [:index]
