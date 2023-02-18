@@ -4,8 +4,18 @@ class HcMember < ApplicationRecord
   belongs_to :hc_constituency
   has_many :hc_cvs
 
-  # 選挙区ごとの参議院議員
-  def self.latest_of_hc_constituency(hc_constituency_id:, hc_election_time_ids:)
+  # 参議院選挙区.idを指定して選挙区選出の参議院議員を取得
+  # 【引数】
+  # hc_constituency_id（参議院選挙区.id）
+  # hc_election_time_ids（参議院選挙回.id）
+  # ・指定しない場合、デフォルト値で直近２回の選挙回（現役議員分）が入る
+  # 【備考】
+  # ・途中任期終了日が入っているものも含んで取得しているため、
+  # 　途中任期終了議員を外す場合はfront側で処理が必要
+  def self.of_hc_constituency(
+    hc_constituency_id:,
+    hc_election_time_ids: HcElectionTime.pluck(:id).last(2)
+  )
     eager_load(
       :hc_constituency,
       :hc_election_time,
@@ -16,11 +26,11 @@ class HcMember < ApplicationRecord
       hc_constituency_id: hc_constituency_id
     ).order(
       "politicians.last_name_kana ASC, politicians.first_name_kana ASC"
-    ).to_json(
+    ).as_json(
       only: [:id],
       include: {
-        hc_constituency: { only: [:id, :name, :quota] },
-        hc_election_time: { only: [:id, :election_time, :expiration_date] },
+        hc_constituency: { only: [:id, :name, :quota, :reelection_number] },
+        hc_election_time: { only: [:id, :election_time, :announcement_date, :election_date, :expiration_date] },
         politician: {
           only: [:id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana],
           include: {
@@ -28,7 +38,7 @@ class HcMember < ApplicationRecord
               only: [],
               include: {
                 political_party: {
-                  only: [:name_kanji, :abbreviation_kanji]
+                  only: [:id, :name_kanji, :abbreviation_kanji]
                 }
               }
             }
@@ -38,8 +48,16 @@ class HcMember < ApplicationRecord
     )
   end
 
-  # 全国比例選出参議院議員
-  def self.latest_of_hc_pr(hc_election_time_ids:)
+  # 全国比例選出の参議院議員を取得
+  # 【引数】
+  # hc_election_time_ids（参議院選挙回.id）
+  # ・指定しない場合、デフォルト値で直近２回の選挙回（現役議員分）が入る
+  # 【備考】
+  # ・途中任期終了日が入っているものも含んで取得しているため、
+  # 　途中任期終了議員を外す場合はfront側で処理が必要
+  def self.of_hc_pr(
+    hc_election_time_ids: HcElectionTime.pluck(:id).last(2)
+  )
     eager_load(
       :hc_election_time,
       { politician: { political_party_members: :political_party } }
@@ -48,10 +66,10 @@ class HcMember < ApplicationRecord
       elected_system: 2
     ).order(
       "politicians.last_name_kana ASC, politicians.first_name_kana ASC"
-    ).to_json(
+    ).as_json(
       only: [:id],
       include: {
-        hc_election_time: { only: [:id, :election_time, :expiration_date] },
+        hc_election_time: { only: [:id, :election_time, :announcement_date, :election_date, :expiration_date] },
         politician: {
           only: [:id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana],
           include: {
@@ -59,7 +77,7 @@ class HcMember < ApplicationRecord
               only: [],
               include: {
                 political_party: {
-                  only: [:name_kanji, :abbreviation_kanji]
+                  only: [:id, :name_kanji, :abbreviation_kanji]
                 }
               }
             }
