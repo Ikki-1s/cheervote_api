@@ -17,52 +17,43 @@ class Politician < ApplicationRecord
     ).where(
       id: politician_id
     ).as_json(
-      only: [
-        :id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana,
-        :image, :career, :website, :twitter, :youtube, :facebook, :other_sns
-      ],
+      except: [:created_at, :updated_at],
       include: {
         hr_members: {
-          only: [
-            :id, :politician_id, :hr_election_time_id, :elected_system, :hr_constituency_id, :hr_pr_block_id,
-            :mid_term_start_date, :mid_term_start_reason, :mid_term_end_date, :mid_term_end_reason
-          ],
+          except: [:created_at, :updated_at],
           include: {
             hr_election_time: {
-              only: [:id, :election_time, :announcement_date, :election_date, :expiration_date, :dissolution_date]
+              except: [:created_at, :updated_at],
             },
             hr_constituency: {
-              only: [:id, :name, :prefecture_id],
+              except: [:created_at, :updated_at],
               include: {
                 prefecture: {
-                  only: [:id, :prefecture]
+                  except: [:created_at, :updated_at],
                 }
               }
             },
             hr_pr_block: {
-              only: [:id, :block_name]
+              except: [:created_at, :updated_at],
             }
           }
         },
         hc_members: {
-          only: [
-            :id, :politician_id, :hc_election_time_id, :elected_system, :hc_constituency_id,
-            :mid_term_start_date, :mid_term_start_reason, :mid_term_end_date, :mid_term_end_reason
-          ],
+          except: [:created_at, :updated_at],
           include: {
             hc_election_time: {
-              only: [:id, :election_time, :announcement_date, :election_date, :expiration_date]
+              except: [:created_at, :updated_at],
             },
             hc_constituency: {
-              only: [:id, :name]
+              except: [:created_at, :updated_at],
             }
           }
         },
         political_party_members: {
-          only: [:id, :politician_id, :political_party_id, :start_belonging_date, :end_belonging_date],
+          except: [:created_at, :updated_at],
           include: {
             political_party: {
-              only: [:id, :name_kanji, :name_kana, :abbreviation_kanji, :abbreviation_kana]
+              except: [:created_at, :updated_at],
             }
           }
         }
