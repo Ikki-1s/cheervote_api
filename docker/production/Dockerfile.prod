@@ -1,0 +1,50 @@
+FROM ruby:3.0.6-alpine as builder
+
+ENV LANG=C.UTF-8 \
+  TZ=Asia/Tokyo
+
+WORKDIR /app
+COPY Gemfile* /app
+
+RUN apk update \
+ && apk add --no-cache -t .build-packages \
+    alpine-sdk \
+    build-base \
+ && apk add --no-cache \
+    tzdata \
+    mysql-dev \
+ && bundle install -j4 \
+ && apk del --purge .build-packages
+
+
+FROM ruby:3.0.6-alpine
+
+ENV LANG=C.UTF-8 \
+  TZ=Asia/Tokyo \
+  RAILS_ENV=production
+
+WORKDIR /app
+
+RUN apk update \
+ && apk add \
+    tzdata \
+    bash \
+    mysql-dev \
+    mysql-client
+
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+COPY . /app
+
+RUN mkdir -p tmp/pids
+RUN mkdir -p tmp/sockets
+
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
+VOLUME /app/public
+VOLUME /app/tmp
+
+# Configure the main process to run when running the image
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

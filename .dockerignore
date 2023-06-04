@@ -1,0 +1,18 @@
+# node_modules/
+# public/packs/
+vendor/
+log/
+tmp/
+!/tmp/pids/.keep
+!/tmp/sockets/.keep
+.env
+.git
+.github/
+config/master.key
+# deploy/
+spec/
+storage/
+nginx/
+.rubocop_todo.yml
+.rubocop.yml
+db/fixtures/development/
