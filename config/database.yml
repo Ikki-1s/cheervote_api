@@ -15,11 +15,12 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: password
-  host: db
+  # host: db
 
 development:
   <<: *default
   database: cheervotedb
+  host: db
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -51,5 +52,6 @@ test:
 production:
   <<: *default
   database: cheervotedb_production
-  username: cheervote
-  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
