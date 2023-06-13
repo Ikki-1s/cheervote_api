@@ -12,7 +12,8 @@ AllCops:
     - "db/**/*"
     - "lib/**"
     - "Gemfile"
-
+    # - ".github/**/*"
+    - ".github/workflows/aws.yml"
 # 20 行超えるのは migration ファイル以外滅多に無い
 Metrics/MethodLength:
   Max: 20
