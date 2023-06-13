@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.3"
+ruby "3.0.6"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem "rails", "~> 6.1.4", ">= 6.1.4.6"
@@ -28,6 +28,7 @@ gem "rack-cors"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -48,3 +49,6 @@ gem "devise"
 gem "devise_token_auth"
 
 gem "seed-fu"
+
+gem 'devise-i18n'
+gem 'devise-i18n-views'
