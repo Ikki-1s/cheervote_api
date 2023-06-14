@@ -39,7 +39,7 @@ env:
                                                     # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: cv-rails                       # set this to the name of the container in the
                                                     # containerDefinitions section of your task definition
-  AWS_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:cv-GitHubActionsCICDRole  # set this to the IAM Role ARN for GitHub Actions
+  AWS_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/cv-GitHubActionsCICDRole  # set this to the IAM Role ARN for GitHub Actions
 
 
 jobs:
