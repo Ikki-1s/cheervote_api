@@ -36,15 +36,15 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # メール認証設定
-  config.action_mailer.default_options = { from: ENV['EMAIL_ADDRESS'] }
+  config.action_mailer.default_options = { from: ENV['FROM_EMAIL_ADDRESS'] }
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 } # apiのポート番号を設定
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: ENV['SMTP_ADDRESS'],
-    port: ENV['SMTP_PORT'],
+    port: ENV['SMTP_PORT'].to_i,
     domain: ENV['SMTP_DOMAIN'],
-    user_name: ENV['EMAIL_ADDRESS'],
-    password: ENV['EMAIL_PASSWORD'],
+    user_name: ENV['FROM_EMAIL_ADDRESS'],
+    password: ENV['SMTP_PASSWORD'],
     authentication: 'plain',
     enable_starttls_auto: true
   }

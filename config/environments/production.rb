@@ -62,17 +62,39 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   # メール認証設定
-  config.action_mailer.default_options = { from: ENV['EMAIL_ADDRESS'] }
+  # mailメソッドオプション (:from、:reply_toなど)のデフォルト値を設定
+  config.action_mailer.default_options = { from: ENV['FROM_EMAIL_ADDRESS'] }
+  # アプリケーションのホスト情報をメーラー内で使いたい場合は:hostパラメータを明示的に指定
   config.action_mailer.default_url_options = { host: ENV['API_DOMAIN_NAME'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
+    # リモートメールサーバーを指定。デフォルトの"localhost"設定から必要に応じて変更
     address: ENV['SMTP_ADDRESS'],
-    port: ENV['SMTP_PORT'],
+    # メールサーバーが万一ポート25番で動作していない場合はここで変更
+    port: ENV['SMTP_PORT'].to_i,
+    # HELOドメインを指定する必要がある場合はここで行なう
     domain: ENV['SMTP_DOMAIN'],
-    user_name: ENV['EMAIL_ADDRESS'],
-    password: ENV['EMAIL_PASSWORD'],
+    # メールサーバーで認証が要求される場合は、ここでユーザー名を設定
+    user_name: ENV['SMTP_USER_NAME'],
+    # メールサーバーで認証が要求される場合は、ここでパスワードを設定
+    password: ENV['SMTP_PASSWORD'],
+    # メールサーバーで認証が要求される場合は、ここで認証の種類を指定する
+    # :plain、:login、:cram_md5のいずれかのシンボルを指定できる
     authentication: 'plain',
+    # 利用するSMTPサーバーでSTARTTLSが有効かどうかを検出し、可能な場合は使う。デフォルト値はtrue
     enable_starttls_auto: true
+    # SMTPサーバーにSTARTTLSで接続する（サポートされていない場合は失敗する）。デフォルト値はfalse
+    # enable_starttls: false
+    # TLSを使う場合、OpenSSLの認証方法を設定できる。これは、自己署名証明書やワイルドカード証明書が必要な場合に便利。
+    # OpenSSLの検証定数である:noneや:peerを指定することも、OpenSSL::SSL::VERIFY_NONE定数や
+    # OpenSSL::SSL::VERIFY_PEER定数を直接指定することもできる
+    # openssl_verify_mode:
+    # SMTP接続でSMTP/TLS（SMTPS: SMTP over direct TLS connection）を有効にします。
+    # ssl/:tls:
+    # コネクション開始の試行中の待ち時間を秒で指定します。
+    # open_timeout:
+    # 呼び出しのタイムアウトを秒で指定
+    # read_timeout:
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
