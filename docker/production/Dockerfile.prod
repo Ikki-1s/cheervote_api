@@ -4,7 +4,9 @@ ENV LANG=C.UTF-8 \
   TZ=Asia/Tokyo
 
 WORKDIR /app
-COPY Gemfile* /app
+# COPY Gemfile* /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
 RUN apk update \
  && apk add --no-cache -t .build-packages \
