@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
+    controller :health_checks do
+      resources :health_checks, only: [:index]
+    end
+
     namespace :v1 do
       mount_devise_token_auth_for "User", at: "auth", controllers: {
         registrations: "api/v1/auth/registrations"
