@@ -7,8 +7,8 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # front側のポート番号を指定
-    origins "localhost:8000"
+    # front側のオリジンを指定
+    origins "localhost:8000", "https://cheervote.jp"
 
     resource '*',
       headers: :any,
