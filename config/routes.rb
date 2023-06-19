@@ -9,6 +9,14 @@ Rails.application.routes.draw do
         registrations: "api/v1/auth/registrations"
       }
 
+      namespace :auth do
+        resources :sessions, only: [:index]
+
+        devise_scope :api_v1_user do
+            post "/guests/sign_in", to: "guests#sign_in"
+        end
+      end
+
       controller :cheervotes do
         get "/cheervotes/results/pie", to: "cheervotes#result_for_pie_chart"
         get "/cheervotes/terms/active/:politician", to: "cheervotes#active_cv_terms_of_politician"
@@ -75,11 +83,6 @@ Rails.application.routes.draw do
       controller :tests do
         resources :tests, only: [:index]
       end
-
-      namespace :auth do
-        resources :sessions, only: [:index]
-      end
-
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

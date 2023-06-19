@@ -87,6 +87,10 @@ class PoliticalPartyMember < ApplicationRecord
       hr_members: { hr_election_time_id: hr_election_time_id, mid_term_end_date: nil }
     # ).where(
     #   hr_members: { mid_term_end_date: nil },
+    ########### ゲストログイン機能用 ###########
+    ).where.not(
+      political_party_id: 17
+    ########### ゲストログイン機能用 ###########
     ).group(
       "political_parties.id",
       "political_parties.name_kanji"
@@ -110,6 +114,10 @@ class PoliticalPartyMember < ApplicationRecord
       hc_members: { hc_election_time_id: hc_election_time_id, mid_term_end_date: nil }
     # ).where(
     #   hc_members: { mid_term_end_date: nil },
+    ########### ゲストログイン機能用 ###########
+    ).where.not(
+      political_party_id: 17
+    ########### ゲストログイン機能用 ###########
     ).group(
       "political_parties.id",
       "political_parties.name_kanji"

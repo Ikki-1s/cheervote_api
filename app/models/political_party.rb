@@ -24,8 +24,10 @@ class PoliticalParty < ApplicationRecord
     hc_election_time_id: HcElectionTime.pluck(:id).last(2)
   )
     # 政党一覧取得
-    political_parties = PoliticalParty.pluck(:id, :name_kanji, :name_kana)
-
+    # political_parties = PoliticalParty.pluck(:id, :name_kanji, :name_kana)
+    ########### ゲストログイン機能用 ###########
+    political_parties = PoliticalParty.where.not(id: 17).pluck(:id, :name_kanji, :name_kana)
+    ########### ゲストログイン機能用 ###########
     # 衆議院
     hr_id_count = PoliticalPartyMember.political_party_hr_members_count(
       hr_election_time_id: hr_election_time_id

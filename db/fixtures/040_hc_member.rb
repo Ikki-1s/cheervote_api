@@ -366,4 +366,8 @@ HcMember.seed(:politician_id, :hc_election_time_id,
   { id: 365, politician_id: 703, hc_election_time_id: 26, elected_system: 1, hc_constituency_id: 13, },
   { id: 366, politician_id: 753, hc_election_time_id: 26, elected_system: 1, hc_constituency_id: 22, },
   { id: 367, politician_id: 706, hc_election_time_id: 26, elected_system: 1, hc_constituency_id: 21, },
+  { id: 368, politician_id: 758, hc_election_time_id: 25, elected_system: 1, hc_constituency_id: 46, },
+  { id: 369, politician_id: 759, hc_election_time_id: 25, elected_system: 1, hc_constituency_id: 46, },
+  { id: 370, politician_id: 760, hc_election_time_id: 26, elected_system: 1, hc_constituency_id: 46, },
+  { id: 371, politician_id: 761, hc_election_time_id: 26, elected_system: 1, hc_constituency_id: 46, },
 )

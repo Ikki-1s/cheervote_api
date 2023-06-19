@@ -14,4 +14,6 @@ PoliticalParty.seed(
   { id: 13, name_kanji: '無所属／碧水会', name_kana: 'むしょぞくへきすいかい', abbreviation_kanji: '無／碧水',  },
   { id: 14, name_kanji: '無所属／みんなの党', name_kana: 'むしょぞくみんなのとう', abbreviation_kanji: '無／みん',  },
   { id: 15, name_kanji: '参政党', name_kana: 'さんせいとう', abbreviation_kanji: '参政',  },
+  { id: 16, name_kanji: '参政党', name_kana: 'さんせいとう', abbreviation_kanji: '参政',  },
+  { id: 17, name_kanji: '（架空）ＹＹ党', name_kana: 'わいわいとう', abbreviation_kanji: 'ＹＹ',  },
 )
