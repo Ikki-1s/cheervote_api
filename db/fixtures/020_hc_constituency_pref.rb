@@ -46,4 +46,5 @@ HcConstituencyPref.seed(:id, :prefecture_id,
   { id: 45, hc_constituency_id: 43, prefecture_id: 45, },
   { id: 46, hc_constituency_id: 44, prefecture_id: 46, },
   { id: 47, hc_constituency_id: 45, prefecture_id: 47, },
+  { id: 48, hc_constituency_id: 46, prefecture_id: 48, },
 )

@@ -1,4 +1,4 @@
-HcConstituency.seed(:id, :name,
+HcConstituency.seed(:id,
   { id: 1, name: '北海道', quota: 6, reelection_number: 3, },
   { id: 2, name: '青森県', quota: 2, reelection_number: 1, },
   { id: 3, name: '岩手県', quota: 2, reelection_number: 1, },
@@ -44,4 +44,5 @@ HcConstituency.seed(:id, :name,
   { id: 43, name: '宮崎県', quota: 2, reelection_number: 1, },
   { id: 44, name: '鹿児島県', quota: 2, reelection_number: 1, },
   { id: 45, name: '沖縄県', quota: 2, reelection_number: 1, },
+  { id: 46, name: 'ＸＸ県', quota: 4, reelection_number: 2, },
 )

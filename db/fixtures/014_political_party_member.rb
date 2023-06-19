@@ -753,4 +753,12 @@ PoliticalPartyMember.seed(:id, :politician_id,
   { id: 752, politician_id: 752, political_party_id:2, },
   { id: 753, politician_id: 753, political_party_id:2, },
   { id: 754, politician_id: 754, political_party_id:8, },
+  { id: 755, politician_id: 755, political_party_id:17, },
+  { id: 756, politician_id: 756, political_party_id:17, },
+  { id: 757, politician_id: 757, political_party_id:17, },
+  { id: 758, politician_id: 758, political_party_id:17, },
+  { id: 759, politician_id: 759, political_party_id:17, },
+  { id: 760, politician_id: 760, political_party_id:17, },
+  { id: 761, politician_id: 761, political_party_id:17, },
+
 )

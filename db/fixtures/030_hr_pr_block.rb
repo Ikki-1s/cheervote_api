@@ -10,4 +10,5 @@ HrPrBlock.seed(:id,
   { id: 9, block_name: '中国', quota: 11, },
   { id: 10, block_name: '四国', quota: 6, },
   { id: 11, block_name: '九州', quota: 20, },
+  { id: 12, block_name: 'ＸＸ', quota: 2, },
 )

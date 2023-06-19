@@ -13,6 +13,10 @@ class Prefecture < ApplicationRecord
       :hr_constituencies,
       hr_pr_block_pref: :hr_pr_block,
       hc_constituency_pref: :hc_constituency
+    ########### ゲストログイン機能用 ###########
+    ).where.not(
+      id: 48
+    ########### ゲストログイン機能用 ###########
     ).order(
       "prefectures.id ASC"
     ).as_json(
