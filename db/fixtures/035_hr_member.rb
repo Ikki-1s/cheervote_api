@@ -465,4 +465,7 @@ HrMember.seed(:politician_id, :hr_election_time_id,
   { id: 464, politician_id: 464, hr_election_time_id: 49, elected_system: 1, hr_constituency_id: 73, hr_pr_block_id: '', mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },
   { id: 465, politician_id: 465, hr_election_time_id: 49, elected_system: 2, hr_constituency_id: '', hr_pr_block_id: 8, mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },
   { id: 466, politician_id: 754, hr_election_time_id: 49, elected_system: 2, hr_constituency_id: 102, hr_pr_block_id: 5, mid_term_start_date: '2022-4-28', mid_term_start_reason: '山本太郎議員（れいわ新選組・衆議院比例東京ブロック）の辞職に伴う繰り上げ当選', mid_term_end_date: '', mid_term_end_reason: '', },
+  { id: 467, politician_id: 755, hr_election_time_id: 49, elected_system: 1, hr_constituency_id: 290, hr_pr_block_id: '', mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },
+  { id: 468, politician_id: 756, hr_election_time_id: 49, elected_system: 2, hr_constituency_id: '', hr_pr_block_id: 12, mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },
+  { id: 469, politician_id: 757, hr_election_time_id: 49, elected_system: 2, hr_constituency_id: 290, hr_pr_block_id: 12, mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },
 )

@@ -288,4 +288,5 @@ HrConstituency.seed(:name, :prefecture_id,
   { id: 287, name: '２区', prefecture_id: 47, },
   { id: 288, name: '３区', prefecture_id: 47, },
   { id: 289, name: '４区', prefecture_id: 47, },
+  { id: 290, name: '１区', prefecture_id: 48, },
 )

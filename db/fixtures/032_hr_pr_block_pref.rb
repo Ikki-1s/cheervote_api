@@ -46,4 +46,5 @@ HrPrBlockPref.seed(:id, :prefecture_id,
   { id: 45, hr_pr_block_id: 11, prefecture_id: 45, },
   { id: 46, hr_pr_block_id: 11, prefecture_id: 46, },
   { id: 47, hr_pr_block_id: 11, prefecture_id: 47, },
+  { id: 48, hr_pr_block_id: 12, prefecture_id: 48, },
 )
