@@ -1,4 +1,4 @@
-HrMember.seed(:politician_id, :hr_election_time_id,
+HrMember.seed(:id,
   { id: 1, politician_id: 1, hr_election_time_id: 49, elected_system: 1, hr_constituency_id: 228, hr_pr_block_id: '', mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },
   { id: 2, politician_id: 2, hr_election_time_id: 49, elected_system: 1, hr_constituency_id: 200, hr_pr_block_id: '', mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },
   { id: 3, politician_id: 3, hr_election_time_id: 49, elected_system: 2, hr_constituency_id: 111, hr_pr_block_id: 4, mid_term_start_date: '', mid_term_start_reason: '', mid_term_end_date: '', mid_term_end_reason: '', },

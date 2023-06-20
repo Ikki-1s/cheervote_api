@@ -1,4 +1,4 @@
-PoliticalPartyMember.seed(:id, :politician_id,
+PoliticalPartyMember.seed(:id,
   { id: 1, politician_id: 1, political_party_id: 2, start_belonging_date: "", end_belonging_date: "", },
   { id: 2, politician_id: 2, political_party_id: 5, start_belonging_date: "", end_belonging_date: "", },
   { id: 3, politician_id: 3, political_party_id: 3, start_belonging_date: "", end_belonging_date: "", },
