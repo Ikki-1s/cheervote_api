@@ -2,10 +2,20 @@ class PoliticalPartyMember < ApplicationRecord
   belongs_to :politician
   belongs_to :political_party
 
-  # 指定した政党の衆議院議員の一覧を返す
-  # ・選挙回を指定しなければ最新の選挙回で出力する。
+  # 政党.idを指定して政党の衆議院議員一覧を返す
+    # 【引数】
+    # political_party_id（政党.id）
+    # hr_election_time_id（衆議院選挙回.id）
+    # ・指定しない場合、デフォルト値で最新の選挙回が入る
+    # end_belonging_date（所属終了年月日）
+    # ・指定しない場合、デフォルト値でnilが入る
+    # ・end_belonging_dateでnil以外を指定したい場合は、
+    # 　指定する衆議院選挙回の「election_date以上」のように指定する
+    # 　（例.「"2022-7-1"..」、「HrElectionTime.last.election_date..」）
   def self.political_party_hr_members(
-    political_party_id:, hr_election_time_id: HrElectionTime.last.id
+    political_party_id:,
+    hr_election_time_id: HrElectionTime.last.id,
+    end_belonging_date: nil
   )
     eager_load(
       politician: { hr_members: { hr_constituency: :prefecture } }
@@ -13,28 +23,29 @@ class PoliticalPartyMember < ApplicationRecord
       politician: { hr_members: :hr_pr_block }
     ).where(
       political_party_id: political_party_id,
+      end_belonging_date: end_belonging_date,
       hr_members: { hr_election_time_id: hr_election_time_id, mid_term_end_date: nil }
     ).order(
       "politicians.last_name_kana ASC, politicians.first_name_kana ASC"
     ).to_json(
-      only: [:id],
+      except: [:created_at, :updated_at],
       include: {
         politician: {
-          only: [:id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana, :image],
+          except: [:created_at, :updated_at],
           include: {
             hr_members: {
-              only: [:id, :politician_id, :hr_election_time_id, :elected_system],
+              except: [:created_at, :updated_at],
               include: {
                 hr_constituency: {
-                  only: [:id, :name],
+                  except: [:created_at, :updated_at],
                   include: {
                     prefecture: {
-                      only: [:id, :prefecture]
+                      except: [:created_at, :updated_at],
                     }
                   }
                 },
                 hr_pr_block: {
-                  only: [:id, :block_name]
+                  except: [:created_at, :updated_at],
                 }
               }
             }
@@ -44,27 +55,40 @@ class PoliticalPartyMember < ApplicationRecord
     )
   end
 
-  # 指定した政党の参議院議員の一覧を返す
-  # ・選挙回を指定しなければ最新の選挙回で出力する。
-  def self.political_party_hc_members(political_party_id:, hc_election_time_ids: HcElectionTime.pluck(:id).last(2))
+  # 政党.idを指定して政党の参議院議員一覧を返す
+    # 【引数】
+    # political_party_id（政党.id）
+    # hc_election_time_ids（参議院選挙回.id）
+    # ・指定しない場合、デフォルト値で直近２回の選挙回（現役議員分）が入る
+    # end_belonging_date（所属終了年月日）
+    # ・指定しない場合、デフォルト値でnilが入る
+    # ・end_belonging_dateでnil以外を指定したい場合は、
+    # 　指定する参議院選挙回の「election_date以上」のように指定する
+    # 　（例.「"2022-7-1"..」、「HcElectionTime.last.election_date..」）
+  def self.political_party_hc_members(
+    political_party_id:,
+    hc_election_time_ids: HcElectionTime.pluck(:id).last(2),
+    end_belonging_date: nil
+  )
     eager_load(
       politician: { hc_members: :hc_constituency }
     ).where(
       political_party_id: political_party_id,
+      end_belonging_date: end_belonging_date,
       hc_members: { hc_election_time_id: hc_election_time_ids, mid_term_end_date: nil }
     ).order(
       "politicians.last_name_kana ASC, politicians.first_name_kana ASC"
     ).to_json(
-      only: [:id],
+      except: [:created_at, :updated_at],
       include: {
         politician: {
-          only: [:id, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana],
+          except: [:created_at, :updated_at],
           include: {
             hc_members: {
-              only: [:id, :politician_id, :hc_election_time_id, :elected_system],
+              except: [:created_at, :updated_at],
               include: {
                 hc_constituency: {
-                  only: [:id, :name]
+                  except: [:created_at, :updated_at],
                 }
               }
             }
@@ -84,6 +108,7 @@ class PoliticalPartyMember < ApplicationRecord
     hr_id_count = PoliticalPartyMember.eager_load(
       :political_party, { politician: :hr_members }
     ).where(
+      end_belonging_date: nil,
       hr_members: { hr_election_time_id: hr_election_time_id, mid_term_end_date: nil }
     # ).where(
     #   hr_members: { mid_term_end_date: nil },
@@ -111,6 +136,7 @@ class PoliticalPartyMember < ApplicationRecord
     hc_id_count = PoliticalPartyMember.eager_load(
       :political_party, { politician: :hc_members }
     ).where(
+      end_belonging_date: nil,
       hc_members: { hc_election_time_id: hc_election_time_id, mid_term_end_date: nil }
     # ).where(
     #   hc_members: { mid_term_end_date: nil },
