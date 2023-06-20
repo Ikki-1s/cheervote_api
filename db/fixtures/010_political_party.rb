@@ -8,7 +8,7 @@ PoliticalParty.seed(
   { id: 7, name_kanji: '日本共産党', name_kana: 'にほんきょうさんとう', abbreviation_kanji: '共産',  },
   { id: 8, name_kanji: 'れいわ新選組', name_kana: 'れいわしんせんぐみ', abbreviation_kanji: 'れ新',  },
   { id: 9, name_kanji: '社会民主党', name_kana: 'しゃかいみんしゅとう', abbreviation_kanji: '社民',  },
-  { id: 10, name_kanji: 'NHK党', name_kana: 'えぬえいちけいとう', abbreviation_kanji: 'N党',  },
+  { id: 10, name_kanji: '政治家女子48党', name_kana: 'せいじかじょしふぉーてぃーえいと', abbreviation_kanji: '女子',  },
   { id: 11, name_kanji: '無所属／有志の会', name_kana: 'むしょぞくゆうしのかい', abbreviation_kanji: '無／有志',  },
   { id: 12, name_kanji: '無所属／沖縄の風', name_kana: 'むしょぞくおきなわのかぜ', abbreviation_kanji: '無／沖縄',  },
   { id: 13, name_kanji: '無所属／碧水会', name_kana: 'むしょぞくへきすいかい', abbreviation_kanji: '無／碧水',  },
