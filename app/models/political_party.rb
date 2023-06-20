@@ -79,10 +79,10 @@ class PoliticalParty < ApplicationRecord
     political_parties_have_count.reject! { |x| x["total"] == 0 }
 
     # 合計議員数（降順）、政党名かな（昇順）に並べ替え（-は数値にのみ有効）
-    political_parties_have_count.sort_by { |x| [-x["total"], x["name_kana"]] }
+    sorted_pp = political_parties_have_count.sort_by { |x| [-x["total"], x["name_kana"]] }
 
     # 無所属系は最後尾に配置
-    partisan, nonpartisan = political_parties_have_count.partition { |x| !x["name_kanji"].include?("無所属") }
+    partisan, nonpartisan = sorted_pp.partition { |x| !x["name_kanji"].include?("無所属") }
     nonpartisan.each do |x|
       partisan << x
     end
