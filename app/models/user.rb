@@ -10,8 +10,8 @@ class User < ApplicationRecord
   belongs_to :hr_constituency
   belongs_to :hc_constituency
   belongs_to :prefecture
-  has_many :hr_cvs
-  has_many :hc_cvs
+  has_many :hr_cvs, dependent: :nullify
+  has_many :hc_cvs, dependent: :nullify
 
   def self.guest
     create do |user|

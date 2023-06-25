@@ -8,7 +8,9 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # front側のオリジンを指定
-    origins "localhost:8000", "https://cheervote.jp"
+    origins "localhost:8000", "https://cheervote.jp",
+      "https://cheervote-front-git-master-ikki-1s.vercel.app",
+      "https://cheervote-front-git-development-ikki-1s.vercel.app"
 
     resource '*',
       headers: :any,
