@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_04_023444) do
+ActiveRecord::Schema.define(version: 2023_06_25_123334) do
 
   create_table "cv_evaluation_values", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "cv_question_id", null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2023_02_04_023444) do
 
   create_table "hc_cvs", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "hc_member_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "hc_cv_term_id", null: false
     t.bigint "cv_question_id", null: false
     t.bigint "cv_evaluation_value_id", null: false
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2023_02_04_023444) do
 
   create_table "hr_cvs", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "hr_member_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.bigint "hr_cv_term_id", null: false
     t.bigint "cv_question_id", null: false
     t.bigint "cv_evaluation_value_id", null: false
