@@ -29,6 +29,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "dotenv-rails"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -52,3 +54,6 @@ gem "seed-fu"
 
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+######## for security alert: Nokogiri affected by zlib's Out-of-bounds Write vulnerability ########
+gem "nokogiri", ">= 1.13.4"
