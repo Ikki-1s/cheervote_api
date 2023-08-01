@@ -60,6 +60,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    addressable (2.8.4)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     bcrypt (3.1.16)
     bootsnap (1.10.3)
@@ -97,6 +99,8 @@ GEM
       activesupport (>= 5.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    launchy (2.5.2)
+      addressable (~> 2.8)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -118,6 +122,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
+    public_suffix (5.0.3)
     puma (5.6.2)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -203,6 +208,8 @@ GEM
     seed-fu (2.3.9)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     spring (4.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
@@ -234,6 +241,7 @@ DEPENDENCIES
   devise_token_auth
   dotenv-rails
   factory_bot_rails
+  launchy
   listen (~> 3.3)
   mysql2 (~> 0.5)
   nokogiri (>= 1.13.4)
@@ -246,6 +254,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   seed-fu
+  shoulda-matchers
   spring
   tzinfo-data
 
